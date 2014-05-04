@@ -8,6 +8,8 @@ env:
   - DB=mysql
 
 before_script:
+  - sudo apt-get install gdb
+
   # MUST UPDATE THIS FOR YOUR EXTENSION
   - VENDOR="phpbb"
   - NAME="boardrules"
@@ -23,7 +25,7 @@ before_script:
   - cd ../../phpbb
 
 script:
-  - ./phpBB/vendor/bin/phpunit --configuration ./phpBB/ext/$VENDOR/$NAME/travis/phpunit-$DB-travis.xml
+  - cat phpBB/ext/$VENDOR/$NAME/script.gdb | sudo gdb --args /home/travis/.phpenv/versions/$(phpenv version-name)/bin/php ./phpBB/vendor/bin/phpunit --configuration ./phpBB/ext/$VENDOR/$NAME/travis/phpunit-$DB-travis.xml
 
 matrix:
   include:
