@@ -41,6 +41,11 @@ class extension_system_exception_test extends phpbb_test_case
 		$this->get_user_instance();
 	}
 
+	public function tearDown()
+	{
+		echo 'teardown';
+	}
+
 	/**
 	* Data for test_exceptions function
 	*
@@ -98,18 +103,5 @@ class extension_system_exception_test extends phpbb_test_case
 		{
 			$this->assertEquals($expected, $e->get_message($this->user));
 		}
-	}
-
-	/**
-	* Test exception language file is being loaded
-	*
-	* @access public
-	*/
-	public function test_exceptions_lang()
-	{
-		$this->get_user_instance();
-
-		// Test a language string present in the exceptions language file
-		$this->assertEquals('Required field missing', $this->user->lang('EXCEPTION_FIELD_MISSING'));
 	}
 }
