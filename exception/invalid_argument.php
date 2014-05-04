@@ -21,8 +21,13 @@ class invalid_argument extends base
 	* @return string
 	* @access public
 	*/
-	public function get_message(\phpbb\user $user)
+	public function get_message(\phpbb\user $user = null)
 	{
-		return $this->translate_portions($user, $this->message_full, 'EXCEPTION_INVALID_ARGUMENT');
+		if ($user === null)
+		{
+			return parent::getMessage();
+		}
+
+		return $this->translate_portions($user, $this->message, 'EXCEPTION_INVALID_ARGUMENT');
 	}
 }

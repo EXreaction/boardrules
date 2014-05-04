@@ -21,8 +21,13 @@ class unexpected_value extends base
 	* @return string
 	* @access public
 	*/
-	public function get_message(\phpbb\user $user)
+	public function getMessage(\phpbb\user $user = null)
 	{
-		return $this->translate_portions($user, $this->message_full, 'EXCEPTION_UNEXPECTED_VALUE');
+		if ($user === null)
+		{
+			return parent::getMessage();
+		}
+
+		return $this->translate_portions($user, $this->message, 'EXCEPTION_UNEXPECTED_VALUE');
 	}
 }
